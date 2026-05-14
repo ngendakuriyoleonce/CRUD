@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\departement;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -11,24 +12,27 @@ class EmployeController extends Controller
      * Display a listing of the resource.
      */
     public function index()
+    : View
     {
-        //
+        return view('employees.employee');
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): View
+    public function create()
+     : View
     {
-        return view('employees.createemploye');
+        $departements=departement::all();
+        return view('employees.createemploye',compact('departements'));
     }
-
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+     
+
     }
 
     /**

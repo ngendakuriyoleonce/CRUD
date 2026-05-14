@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title> @yield('title')</title>
     @vite('resources/css/app.css')
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body class="bg-gray-100">
 
@@ -29,7 +30,7 @@
                         Home
                     </a>
 
-                    <a href="{{route('create')}}" class="text-gray-700 hover:text-black font-medium">
+                    <a href="{{route('emplist')}}" class="text-gray-700 hover:text-black font-medium">
                         Employés
                     </a>
 
@@ -37,7 +38,7 @@
                         Départements
                     </a>
 
-                    <a href="/employees/create"
+                    <a href=""
                        class="bg-black text-white px-4 py-2 rounded-xl hover:opacity-90">
                         + Créer
                     </a>

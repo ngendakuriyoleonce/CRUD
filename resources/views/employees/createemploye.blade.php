@@ -18,7 +18,7 @@
             <!-- Name -->
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">
-                    Name
+                    FULL NAME
                 </label>
 
                 <input
@@ -29,10 +29,10 @@
                 >
             </div>
 
-            <!-- Email -->
+            
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">
-                    Email
+                    CONTRY
                 </label>
 
                 <input
@@ -42,6 +42,20 @@
                     class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black"
                 >
             </div>
+             
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                    AGE
+                </label>
+
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter email"
+                    class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black"
+                >
+            </div>
+
 
             <!-- Phone -->
             <div>
@@ -64,24 +78,24 @@
                 </label>
 
                 <select
+                @foreach ( $departements as $departement)
                     name="department"
                     class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black"
                 >
-                    <option>IT</option>
-                    <option>Finance</option>
-                    <option>Marketing</option>
-                    <option>HR</option>
+               <option>{{$departement->name}}</option>
+                @endforeach
                 </select>
+               
             </div>
 
             <!-- Address -->
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">
-                    Address
+                    DATE OF HIRE
                 </label>
 
                 <input
-                    type="text"
+                    type="date"
                     name="address"
                     placeholder="Enter address"
                     class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black"
@@ -91,7 +105,7 @@
             <!-- Salary -->
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">
-                    Salary
+                    SALARY
                 </label>
 
                 <input
@@ -101,7 +115,19 @@
                     class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black"
                 >
             </div>
+<!-- Salary -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                AGE
+                </label>
 
+                <input
+                    type="number"
+                    name="salary"
+                    placeholder="Enter salary"
+                    class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black"
+                >
+            </div>
         </div>
 
         <!-- Button -->
