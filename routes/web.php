@@ -15,3 +15,7 @@ Route::delete('/Depdel/{id}',[DepartmentController::class,'destroy'])->name('del
 
 Route::get('/Emp',[EmployeController::class,'index'])->name('emplist');
 Route::get('/createEmp',[EmployeController::class,'create'])->name('createEmp');
+Route::post('/createEmp',[EmployeController::class,'store'])->name('storeemp');
+Route::get('/Employe/{id}/edit',[EmployeController::class,'edit'])->name('editEmp');
+Route::put('/Employe/{id}',[EmployeController::class,'update'])->name('updateEmp');
+Route::delete('/Employe/{id}',[EmployeController::class,'destroy'])->name('deletee');

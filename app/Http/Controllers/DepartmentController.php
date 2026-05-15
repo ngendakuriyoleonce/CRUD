@@ -62,7 +62,7 @@ return redirect()->route('createD')->with('success',"Department created successf
     public function update(Request $request, string $id)
      {
         $validated= $request->validate([
-    'code' => ['required', 'integer','unique:departements,code'],
+    'code' => ['required', 'integer'],
     'name' => ['required','string','max:255'],
     'designation' => ['required','string','max:255'],
 ]);

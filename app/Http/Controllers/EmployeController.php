@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\departement;
+use App\Models\employee;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Symfony\Component\VarDumper\Caster\RdKafkaCaster;
 
 class EmployeController extends Controller
 {
@@ -14,7 +16,8 @@ class EmployeController extends Controller
     public function index()
     : View
     {
-        return view('employees.employee');
+        $employes=employee::with('departement')->paginate(5);
+        return view('employees.employee',compact('employes'));
     }
 
     /**
@@ -31,7 +34,19 @@ class EmployeController extends Controller
      */
     public function store(Request $request)
     {
-     
+     $validated= $request->validate([
+        'name' => ['required','string','max:255'],
+        'age' => ['required', 'integer','min:18','max:40'],
+        'departement_id'=> ['required'],
+        'salary' => ['required', 'integer','min:1000'],
+        'contry_code'=> ['required'],
+    'date' => ['required','date'],
+     'phone' => ['required','digits_between:8,10'],
+]);
+
+
+employee::create($validated);
+return back()->with('success',"Empoyee created successfully");
 
     }
 
@@ -48,7 +63,15 @@ class EmployeController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $departements=departement::all();
+         $employes= employee::FindOrFail($id);
+          $countries = [
+        '+257' => '🇧🇮 Burundi',
+        '+250' => '🇷🇼 Rwanda',
+        '+243' => '🇨🇩 DRC',
+        '+971' => '🇦🇪 UAE',
+    ];
+      return view('employees.editemp',compact('employes','departements','countries'));
     }
 
     /**
@@ -56,7 +79,19 @@ class EmployeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+         $validated= $request->validate([
+        'name' => ['required','string','max:255'],
+        'age' => ['required', 'integer','min:18','max:40'],
+        'departement_id'=> ['required'],
+        'salary' => ['required', 'integer','min:1000'],
+        'contry_code'=> ['required'],
+    'date' => ['required','date'],
+     'phone' => ['required','digits_between:8,10'],
+]);
+$employes= employee::FindOrFail($id);
+$employes->update($validated);
+return redirect()->route('emplist')->with('success',"Empoyee updated successfully");
+
     }
 
     /**
@@ -64,6 +99,8 @@ class EmployeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $employes= employee::FindOrFail($id);
+        $employes->delete($id);
+        return redirect()->route('emplist');
     }
 }

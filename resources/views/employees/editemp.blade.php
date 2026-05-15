@@ -1,5 +1,5 @@
 @extends("compnent.base")
-@section('title',"new employe")
+@section('title',"UPDATE_EMPLOYE")
 @section('content')
     
         <div class="bg-white rounded-2xl shadow p-8 mx-75">
@@ -11,13 +11,13 @@
 
 @endif
     <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">
-        CREATE NEW EMPLOYEE
+        EDIT NEW EMPLOYEE
     </h2>
 
-    <form action="{{route('storeemp')}}" method="POST">
+    <form action="{{route('updateEmp',$employes->id)}}" method="POST">
 
         @csrf
-
+@method('PUT')
         <!-- Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
@@ -30,7 +30,7 @@
                 <input
                     type="text"
                     name="name"
-                    placeholder="Enter name"
+                    placeholder="Enter name" value="{{$employes->name}}"
                     class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black"
                 >
                 @error('name')
@@ -48,11 +48,14 @@
                  <select
                 name="contry_code"
                  class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black">
-                <option value="">Select country</option>
-                 <option value="+257">🇧🇮 Burundi (+257)</option>
-                <option value="+250">🇷🇼 Rwanda (+250)</option>
-                <option value="+243">🇨🇩 DRC (+243)</option>
-                <option value="+971">🇦🇪 UAE (+971)</option>
+                     @foreach ($countries as $code => $country)
+
+        <option 
+            value="{{ $code }}" {{ $employes->contry_code == $code ? 'selected' : '' }}
+        >    {{ $country }} ({{ $code }}) </option>
+
+    @endforeach
+                
             </select>
             @error('contry_code')
     <div class="alert alert-danger">{{ $message }}</div>
@@ -68,7 +71,7 @@
                 <input
                     type="text"
                     name="age"
-                    placeholder="Enter age"
+                    placeholder="Enter age" value="{{$employes->age}}"
                     class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black"
                 >
                      @error('age')
@@ -87,7 +90,7 @@
                 <input
                     type="text"
                     name="phone"
-                    placeholder="Enter phone"
+                    placeholder="Enter phone" value="{{$employes->phone}}"
                     class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black"
                 >
                      @error('phone')
@@ -110,7 +113,9 @@
                  <option value="">Select Department</option>
                 @foreach ($departements as $departement)
                
-               <option value="{{ $departement->id}}">{{$departement->name}}</option>
+               <option value="{{$departement->id}}" {{$employes->departement_id ==  $departement -> id ? "selected" :""}}>
+            {{ $departement -> name}}
+        </option>
                 @endforeach
                 </select>
                     @error('departement_id')
@@ -127,7 +132,7 @@
 
                 <input
                     type="date"
-                    name="date"
+                    name="date" value="{{ \Carbon\Carbon::parse($employes->date)->format('Y-m-d') }}"
                    
                     class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black"
                 >
@@ -145,7 +150,7 @@
                 <input
                     type="number"
                     name="salary"
-                    placeholder="Enter salary"
+                    placeholder="Enter salary" value="{{$employes->salary}}"
                     class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black"
                 >
                              @error('salary')
