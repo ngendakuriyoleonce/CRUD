@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\departement;
 use App\Models\employee;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\Unique;
 use Illuminate\View\View;
 use Symfony\Component\VarDumper\Caster\RdKafkaCaster;
 
@@ -41,7 +42,7 @@ class EmployeController extends Controller
         'salary' => ['required', 'integer','min:1000'],
         'contry_code'=> ['required'],
     'date' => ['required','date'],
-     'phone' => ['required','digits_between:8,10'],
+     'phone' => ['required','digits_between:8,10','unique:employees,phone'],
 ]);
 
 
