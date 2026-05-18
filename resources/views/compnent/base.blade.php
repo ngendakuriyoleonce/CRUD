@@ -19,7 +19,7 @@
                 <!-- Logo -->
                 <div>
                     <h1 class="text-2xl font-bold text-gray-800">
-                        Admin Panel
+                        DASHBOARD
                     </h1>
                 </div>
 
@@ -31,16 +31,11 @@
                     </a>
 
                     <a href="{{route('emplist')}}" class="text-gray-700 hover:text-black font-medium">
-                        Employés
+                        Employees
                     </a>
 
                     <a href="{{route('createD')}}" class="text-gray-700 hover:text-black font-medium">
-                        Départements
-                    </a>
-
-                    <a href=""
-                       class="bg-black text-white px-4 py-2 rounded-xl hover:opacity-90">
-                        + Créer
+                        Departements
                     </a>
 
                 </div>

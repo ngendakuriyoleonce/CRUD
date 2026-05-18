@@ -15,7 +15,7 @@
                 </p>
 
                 <h2 class="text-3xl font-bold text-gray-800 mt-2">
-                    120
+                    {{ $totalEmp}}
                 </h2>
             </div>
 
@@ -34,11 +34,11 @@
 
             <div>
                 <p class="text-gray-500 text-sm">
-                    Total Departments
+                    Total departments
                 </p>
 
                 <h2 class="text-3xl font-bold text-gray-800 mt-2">
-                    8
+                   {{$totalDep}}
                 </h2>
             </div>
 
@@ -61,9 +61,9 @@
             Employees Table
         </h2>
 
-        <button class="bg-black text-white px-5 py-2 rounded-xl hover:opacity-90">
-            + Add Employee
-        </button>
+        <a href="{{route('createEmp')}}" class="bg-blue-600 text-white px-5 py-2 rounded-xl hover:opacity-90">
+           <i class="bx bx-plus"></i>
+        </a>
 
     </div>
 
@@ -74,23 +74,28 @@
             <tr class="bg-gray-100 text-gray-700 text-left">
 
                 <th class="p-4 font-semibold rounded-l-xl">
-                    ID
+                    #
                 </th>
 
                 <th class="p-4 font-semibold">
-                    Name
+                    NAME
                 </th>
 
                 <th class="p-4 font-semibold">
-                    Email
+                    PHONE
+                </th>
+                
+                <th class="p-4 font-semibold">
+                    COUNTRY
+                </th>
+
+
+                <th class="p-4 font-semibold">
+                    DEPARTEMENT
                 </th>
 
                 <th class="p-4 font-semibold">
-                    Department
-                </th>
-
-                <th class="p-4 font-semibold">
-                    Salary
+                    SALARY
                 </th>
 
                 <th class="p-4 font-semibold rounded-r-xl">
@@ -102,46 +107,64 @@
 
         <!-- Table Body -->
         <tbody class="divide-y divide-gray-200">
-
+            @forelse ($employes as $employe )
+                
+          
+                
+           
             <tr class="hover:bg-gray-50 transition">
 
-                <td class="p-4">1</td>
+                <td class="p-4">  {{ $employes ->firstItem() + $loop->index}}</td>
 
                 <td class="p-4 font-medium text-gray-800">
-                    John Doe
+                    {{$employe->name}}
                 </td>
 
                 <td class="p-4 text-gray-600">
-                    john@example.com
+                   {{$employe->phone}}
                 </td>
-
+<td class="p-4 text-gray-600">
+                   {{$employe->contry_code}}
+                </td>
                 <td class="p-4">
                     <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm">
-                        IT
+                       {{$employe->departement->name}}
                     </span>
                 </td>
 
                 <td class="p-4">
-                    $1200
+                   {{$employe->salary}}
                 </td>
 
                 <td class="p-4 flex gap-2">
 
-                    <button class="bg-green-500 text-white px-4 py-2 rounded-lg hover:opacity-90">
+                    <a href="{{route('editEmp',$employe->id)}}" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:opacity-90">
                         Edit
-                    </button>
-
-                    <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:opacity-90">
+                    </a>
+<form action="{{route('deletee',$employe->id)}}" method="POST">
+    @csrf
+    @method('DELETE')
+                    <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:opacity-90" onclick="return confirm ('Are you sure to delete this record')">
                         Delete
                     </button>
-
+</form>
                 </td>
 
             </tr>
+                          
+@empty
+<tr>
+        <td colspan="4" class="text-center py-4 text-gray-500">
+            <i class='bx bx-data text-5xl text-gray-400'></i>
+            No records found
+        </td>
+    </tr>
 
         </tbody>
-
+@endforelse
     </table>
+    
+ {{ $employes->links() }}
 
 </div>
 @endsection

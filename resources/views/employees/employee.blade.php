@@ -7,15 +7,29 @@
 
     <div class="flex items-center justify-between mb-6">
 
-        <h2 class="text-2xl font-bold text-gray-800">
-            Employees Table
-        </h2>
+    <!-- Title -->
+    <h2 class="text-2xl font-bold text-gray-800">
+        Employees Table
+    </h2>
 
-        <a href="{{route('createEmp')}}" class="bg-black text-white px-5 py-2 rounded-xl hover:opacity-90">
-            + Add Employee
+    <!-- Buttons -->
+    <div class="flex items-center gap-3">
+
+        <!-- Add -->
+        <a href="{{ route('createEmp') }}"
+           class="bg-blue-600 text-white px-5 py-2 rounded-xl hover:opacity-90">
+            <i class="bx bx-plus"></i>
+        </a>
+
+        <!-- PDF -->
+        <a href="{{ route('pdf') }}"
+           class="bg-red-500 text-white px-4 py-2 rounded-lg hover:opacity-90">
+            <i class="bx bx-arrow-to-bottom"></i>
         </a>
 
     </div>
+
+</div>
 
     <table class="w-full border-collapse">
 
@@ -94,7 +108,7 @@
 <form action="{{route('deletee',$employe->id)}}" method="POST">
     @csrf
     @method('DELETE')
-                    <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:opacity-90">
+                    <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:opacity-90" onclick="return confirm ('Are you sure to delete this record')">
                         Delete
                     </button>
 </form>

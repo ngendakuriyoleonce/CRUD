@@ -3,10 +3,11 @@
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EmployeController;
 use Illuminate\Support\Facades\Route;
-Route::get('/',function(){
-    return view('dashboard');
-}
- );
+use App\Http\Controllers\DashbordController;
+use App\Http\Controllers\PdfController;
+
+Route::get('/pdf', [PdfController::class, 'generate'])->name('pdf');
+Route::get('/', [DashbordController::class, 'index']);
 Route::get('/createDep',[DepartmentController::class,'index'])->name('createD');
 Route::post('/Dep',[DepartmentController::class,'store'])->name('store');
 Route::get('/departement/{id}/edit',[DepartmentController::class,'edit'])->name('editDep');
@@ -14,6 +15,7 @@ Route::put('/departement/{id}/edit',[DepartmentController::class,'update'])->nam
 Route::delete('/Depdel/{id}',[DepartmentController::class,'destroy'])->name('delete');
 
 Route::get('/Emp',[EmployeController::class,'index'])->name('emplist');
+
 Route::get('/createEmp',[EmployeController::class,'create'])->name('createEmp');
 Route::post('/createEmp',[EmployeController::class,'store'])->name('storeemp');
 Route::get('/Employe/{id}/edit',[EmployeController::class,'edit'])->name('editEmp');
