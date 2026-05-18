@@ -39,6 +39,18 @@ Install dependencies:
 composer install
 ```
 
+Install PDF package
+
+```bash
+composer require barryvdh/laravel-dompdf
+```
+
+Install Node dependencies
+
+```bash
+npm install
+```
+
 Copy environment file:
 
 ```bash
@@ -52,8 +64,10 @@ php artisan key:generate
 ```
 
 Configure database in `.env`
+DB_DATABASE=employee_management
+DB_USERNAME=root
+DB_PASSWORD=
 
-Run migration:
 
 ```bash
 php artisan migrate
