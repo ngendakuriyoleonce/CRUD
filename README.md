@@ -30,7 +30,7 @@ git clone https://github.com/ngendakuriyoleonce/project.git
 Go to project:
 
 ```bash
-cd project
+cd CRUD
 ```
 
 Install dependencies:
